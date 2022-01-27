@@ -6,6 +6,6 @@ COPY ./base/main.sh .
 ENV CHECKER_DATA_DIRECTORY=/data/checker
 
 RUN apt-get update -yqq \
-    && apt-get install -yqq build-essential \
+    && apt-get install -yqq build-essential python3 \
     && chmod +x /base/main.sh \
     && ln /base/main.sh /usr/local/bin/bash
