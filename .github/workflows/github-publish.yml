@@ -7,7 +7,7 @@ on:
 
 env:
   DOCKER_IMG_NAME: "ghcr.io/${{ github.repository }}/base-container"
-  DOCKER_IMG_TAGS: "ubuntu20"
+  DOCKER_IMG_TAGS: "ubuntu22 latest"
 
 jobs:
   build-and-push:
