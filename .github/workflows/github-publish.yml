@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+env:
+  DOCKER_IMG_NAME: "ghcr.io/${{ github.repository }}/base-container"
+  DOCKER_IMG_TAGS: "ubuntu20"
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -22,8 +26,13 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/${{ github.repository }}/base-container:latest .
+          docker build -t "$DOCKER_IMG_NAME:build-tmp" .
+          for tag in $DOCKER_IMG_TAGS; do
+            docker image tag "$DOCKER_IMG_NAME:build-tmp" "$DOCKER_IMG_NAME:$tag"
+          done
 
       - name: Push Docker image
         run: |
-          docker push ghcr.io/${{ github.repository }}/base-container:latest
+          for tag in $DOCKER_IMG_TAGS; do
+            docker push "$DOCKER_IMG_NAME:$tag"
+          done
