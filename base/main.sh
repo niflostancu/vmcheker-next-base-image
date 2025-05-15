@@ -17,7 +17,6 @@ rm -rf "$CI_PROJECT_DIR/.git"
 echo "<VMCK_NEXT_BEGIN>"    # begin trace mark
 (
     cd "$CI_PROJECT_DIR/checker" || fatal "The 'checker' directory was not found in your repository!"
-    unset "${!CI@}"
     su -c '/bin/bash "./checker.sh"' mrchecker
 )
 echo "<VMCK_NEXT_END>"      # end trace mark
